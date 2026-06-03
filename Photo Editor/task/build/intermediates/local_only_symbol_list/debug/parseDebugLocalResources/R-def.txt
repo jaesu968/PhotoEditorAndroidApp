@@ -8,9 +8,11 @@ drawable ic_launcher_foreground
 drawable myexample
 id btnGallery
 id ivPhoto
+id slBrightness
 layout activity_main
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
+string brightness_slider
 string gallery
 style AppTheme

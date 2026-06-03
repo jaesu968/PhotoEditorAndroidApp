@@ -4,6 +4,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <string name="app_name">Photo Editor</string>
+    <string name="brightness_slider">Brightness Slider</string>
     <string name="gallery">Gallery</string>
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         

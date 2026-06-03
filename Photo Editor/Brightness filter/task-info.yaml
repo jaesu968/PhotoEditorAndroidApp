@@ -46,5 +46,8 @@ files:
   - name: test/java/org/hyperskill/photoeditor/Stage2UnitTest.kt
     learner_created: false
 feedback_link: https://hyperskill.org/projects/559/stages/3194/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 03 Jun 2026 17:01:58 UTC"
 record: -1

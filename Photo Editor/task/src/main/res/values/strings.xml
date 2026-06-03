@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Photo Editor</string>
     <string name="gallery">Gallery</string>
+    <string name="brightness_slider">Brightness Slider</string>
 </resources>

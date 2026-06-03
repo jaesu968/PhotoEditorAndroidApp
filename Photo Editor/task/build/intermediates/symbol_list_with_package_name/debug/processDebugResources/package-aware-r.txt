@@ -3360,6 +3360,7 @@ id showHome
 id showTitle
 id sin
 id skipCollapsed
+id slBrightness
 id slide
 id snackbar_action
 id snackbar_text
@@ -3682,6 +3683,7 @@ string bottomsheet_action_expand
 string bottomsheet_action_expand_halfway
 string bottomsheet_drag_handle_clicked
 string bottomsheet_drag_handle_content_description
+string brightness_slider
 string call_notification_answer_action
 string call_notification_answer_video_action
 string call_notification_decline_action

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.slider.Slider;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -26,11 +27,15 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final ImageView ivPhoto;
 
+  @NonNull
+  public final Slider slBrightness;
+
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull Button btnGallery,
-      @NonNull ImageView ivPhoto) {
+      @NonNull ImageView ivPhoto, @NonNull Slider slBrightness) {
     this.rootView = rootView;
     this.btnGallery = btnGallery;
     this.ivPhoto = ivPhoto;
+    this.slBrightness = slBrightness;
   }
 
   @Override
@@ -72,7 +77,14 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, btnGallery, ivPhoto);
+      id = R.id.slBrightness;
+      Slider slBrightness = ViewBindings.findChildViewById(rootView, id);
+      if (slBrightness == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((ConstraintLayout) rootView, btnGallery, ivPhoto,
+          slBrightness);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
