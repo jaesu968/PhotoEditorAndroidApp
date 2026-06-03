@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -16,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     private lateinit var currentImage: ImageView
+    // button field to be initialized later if needed
+    private lateinit var btnGallery: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +27,22 @@ class MainActivity : AppCompatActivity() {
 
         //do not change this line
         currentImage.setImageBitmap(createBitmap())
+        // set up click listener for the gallery button
+        btnGallery.setOnClickListener {
+            // create an intent to open the gallery from the device
+            val intent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            )
+            // launch the intent using the activity result launcher
+            activityResultLauncher.launch(intent)
+        }
+
     }
 
     private fun bindViews() {
         currentImage = findViewById(R.id.ivPhoto)
+        btnGallery = findViewById(R.id.btnGallery)
     }
 
     // do not change this function
@@ -60,4 +75,15 @@ class MainActivity : AppCompatActivity() {
         bitmapOut.setPixels(pixels, 0, width, 0, 0, width, height)
         return bitmapOut
     }
+    // AcitivtyResultLauncher to handle the result from the gallery
+    private val activityResultLauncher =
+        registerForActivityResult(StartActivityForResult()) { result ->
+            // if the result is OK, get the image URI and set it to the ImageView
+            if (result.resultCode == Activity.RESULT_OK) {
+                // get the image URI from the result data
+                val photoUri = result.data?.data ?: return@registerForActivityResult
+                // set the image URI to the ImageView
+                currentImage.setImageURI(photoUri)
+            }
+        }
 }

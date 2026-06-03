@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.hyperskill.photoeditor.Stage1UnitTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-06-03T15:57:06" hostname="dhcp-10-101-135-157.wireless.northwestern.private" time="2.496">
+  <properties/>
+  <testcase name="test01_checkImageView" classname="org.hyperskill.photoeditor.Stage1UnitTest" time="2.337"/>
+  <testcase name="test02_checkButtonGallery" classname="org.hyperskill.photoeditor.Stage1UnitTest" time="0.047"/>
+  <testcase name="test03_checkButtonOpensGallery" classname="org.hyperskill.photoeditor.Stage1UnitTest" time="0.051"/>
+  <testcase name="test04_checkButtonLoadsImage" classname="org.hyperskill.photoeditor.Stage1UnitTest" time="0.061"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

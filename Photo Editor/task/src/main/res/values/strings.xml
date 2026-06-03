@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Photo Editor</string>
+    <string name="gallery">Gallery</string>
 </resources>
