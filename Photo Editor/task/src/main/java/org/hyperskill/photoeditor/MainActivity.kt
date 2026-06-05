@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnSave: Button
     // property for brightness slider
     private lateinit var slBrightness: Slider
+    // property for the contrast slider
+    private lateinit var slContrast: Slider
     // property for baseBitmap to store the original image for brightness adjustment
     private var baseBitmap: Bitmap? = null
 
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             // check for permission, override the onRequestPermissionsResults method to check whether the user granted the permission or not,
             // if granted, save the image, if not, show a toast message that permission is required to save the image
-            if(checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 // if permission is granted, override onRequestPermissionsResult
                 // get a bitmap from the current image in the ImageView
                 val bitmap: Bitmap = (currentImage.drawable as BitmapDrawable).bitmap
@@ -87,15 +89,28 @@ class MainActivity : AppCompatActivity() {
         // hook slider and gallery listeners
 
         // set up the slider listener to adjust brightness when the slider value changes
+        // apply filters together in required order to avoid stacking effects,
+        // meaning that when one slider is adjusted,
+        // it should apply both filters together based on the current values of both sliders to ensure
+        // that the adjustments are applied correctly without compounding the effects of previous adjustments
+        // Brightness slider listener first
         slBrightness.addOnChangeListener { _, value, _ ->
-            // convert value to Int (it will be multiples of 10 from -100 to 100)
-            val delta = value.toInt()
-            // recompute from BaseBitmap every time
-            baseBitmap?.let { original ->
-                currentImage.setImageBitmap(applyBrightnessFilter(original, delta))
+                /// get current brightness value
+                val brightness = value.toInt()
+                // apply changes to base bitmap and render the filters to update the image in the ImageView
+                baseBitmap?.let { source ->
+                    renderFilters(source, slContrast.value.toInt(), brightness)
+                }
             }
-        }
-
+        // Contrast slider listener second
+        slContrast.addOnChangeListener { _, value, _ ->
+                // get current contrast value
+                val contrast = value.toInt()
+                // apply changes to base bitmap and render the filters to update the image in the ImageView
+                baseBitmap?.let { source ->
+                    renderFilters(source, contrast, slBrightness.value.toInt())
+                }
+            }
     }
     // helper function to override onRequestPermissionResult
     // this function checks if the permission request code matches and if the permission was granted,
@@ -112,6 +127,63 @@ class MainActivity : AppCompatActivity() {
                 btnSave.callOnClick()
             }
         }
+
+    // helper function to apply both contrast and brightness filters
+    fun renderFilters(source: Bitmap, contrast: Int, brightness: Int) {
+        // get brightness adjusted bitmap
+        val brightBitmap = applyBrightnessFilter(source, brightness)
+        // get adjusted contrast bitmap by applying contrast filter to the adjusted brightness bitmap
+        // to ensure that both adjustments are applied together correctly without stacking effects
+        val contrastBitmap = applyContrastFilter(brightBitmap, contrast)
+        // set the final adjusted bitmap to the ImageView to update the displayed image
+        currentImage.setImageBitmap(contrastBitmap)
+    }
+    //a function to apply contrast changes to the image based on the slider value
+    fun applyContrastFilter(source: Bitmap, contrast: Int): Bitmap {
+        // read all pixels from the source bitmap into an array
+        val width = source.width // get the width of the source bitmap
+        val height = source.height // get the height of the source bitmap
+        val pixels = IntArray(width * height) // create an array to hold the pixel data
+        // get the pixel data from the source bitmap and store it in the "pixels" array
+        source.getPixels(pixels, 0, width, 0, 0, width, height)
+        // variable for the sum of the brightness
+        var brightnessSum = 0L // should be a long to avoid overflow when summing brightness values of all pixels
+        // for each pixel, adjust the RGB values based on the contrast factor
+        // first loop, for each pixel compute brightness (r + g + b) / 3
+        for (i in pixels.indices){
+            val color = pixels[i]
+            val r = Color.red(color)
+            val g = Color.green(color)
+            val b = Color.blue(color)
+            // compute brightness for the pixel and add it to the brightness sum
+            brightnessSum += (r + g + b) / 3
+        }
+        // avgBrightness will be computed by (Sum Of Brightness / pixelCount).toInt() after the loop
+        // compute the average brightness of the image
+        val avgBrightness = (brightnessSum / pixels.size).toInt()
+        // compute alpha, alpha = (255.0 + contrast) / (255.0 - contrast)
+        val alpha = (255.0 + contrast) / (255.0 - contrast)
+        // second loop, for each pixel, clamp the adjusted RGB values based on the contrast factor and the average brightness
+        for(i in pixels.indices){
+            val color = pixels[i]
+            val r = Color.red(color)
+            val g = Color.green(color)
+            val b = Color.blue(color)
+            // apply contrast adjustment formula to each RGB channel and clamp the result
+            val rContrast = clamp((alpha * (r - avgBrightness) + avgBrightness).toInt())
+            val gContrast = clamp((alpha * (g - avgBrightness) + avgBrightness).toInt())
+            val bContrast = clamp((alpha * (b - avgBrightness) + avgBrightness).toInt())
+            // set the adjusted color back to the pixel array
+            pixels[i] = Color.argb(Color.alpha(color), rContrast, gContrast, bContrast)
+        }
+        // create a new bitmap with the adjusted pixel array
+        val adjustedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        // set the adjusted pixels to the new bitmap
+        adjustedBitmap.setPixels(pixels, 0, width, 0, 0, width, height)
+        // return the adjusted bitmap to be displayed in the ImageView
+        return adjustedBitmap
+    }
+
     // a function to apply brightness changes to the image based on the slider value
     fun applyBrightnessFilter(source: Bitmap, delta: Int): Bitmap {
         // read pixel array from the source bitmap
@@ -142,7 +214,7 @@ class MainActivity : AppCompatActivity() {
 
     // helper function to check to image save permission
     fun checkPermission(manifestPermission: String): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             this.checkSelfPermission(manifestPermission) == PackageManager.PERMISSION_GRANTED
         } else {
             PermissionChecker.checkSelfPermission(this, manifestPermission) == PermissionChecker.PERMISSION_GRANTED
@@ -157,6 +229,7 @@ class MainActivity : AppCompatActivity() {
         btnGallery = findViewById(R.id.btnGallery)
         slBrightness = findViewById(R.id.slBrightness)
         btnSave = findViewById(R.id.btnSave)
+        slContrast = findViewById(R.id.slContrast)
     }
 
     // do not change this function
@@ -205,9 +278,8 @@ class MainActivity : AppCompatActivity() {
                 baseBitmap = loadedBitmap
 
                 // reapply current slider value from base (no stacking)
-                val filtered = applyBrightnessFilter(loadedBitmap, slBrightness.value.toInt())
-                // set the filtered bitmap to the ImageView
-                currentImage.setImageBitmap(filtered)
+                // apply both bright and contrast filters with renderFilters to apply both adjustments together
+                renderFilters(loadedBitmap, slContrast.value.toInt(), slBrightness.value.toInt())
             }
         }
 }

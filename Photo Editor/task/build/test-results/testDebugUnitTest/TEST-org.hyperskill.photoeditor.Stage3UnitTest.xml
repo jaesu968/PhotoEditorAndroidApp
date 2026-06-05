@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.hyperskill.photoeditor.Stage3UnitTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-06-05T16:42:39" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="0.175">
+<testsuite name="org.hyperskill.photoeditor.Stage3UnitTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-06-05T19:22:26" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="0.201">
   <properties/>
-  <testcase name="test01_checkButtonSave" classname="org.hyperskill.photoeditor.Stage3UnitTest" time="0.037"/>
-  <testcase name="test02_checkPermissionWasAsked" classname="org.hyperskill.photoeditor.Stage3UnitTest" time="0.036"/>
-  <testcase name="test03_checkBitmapIsSaved" classname="org.hyperskill.photoeditor.Stage3UnitTest" time="0.061"/>
+  <testcase name="test01_checkButtonSave" classname="org.hyperskill.photoeditor.Stage3UnitTest" time="0.05"/>
+  <testcase name="test02_checkPermissionWasAsked" classname="org.hyperskill.photoeditor.Stage3UnitTest" time="0.049"/>
+  <testcase name="test03_checkBitmapIsSaved" classname="org.hyperskill.photoeditor.Stage3UnitTest" time="0.06"/>
   <testcase name="test04_checkBitmapIsSavedAfterPermissionIsGranted" classname="org.hyperskill.photoeditor.Stage3UnitTest" time="0.041"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

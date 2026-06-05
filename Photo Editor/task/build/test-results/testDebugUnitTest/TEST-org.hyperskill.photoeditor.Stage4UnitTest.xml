@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.hyperskill.photoeditor.Stage4UnitTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-06-05T19:22:26" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="1.86">
+  <properties/>
+  <testcase name="test01_checkSliderContrast" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.033"/>
+  <testcase name="test02_checkSliderContrastNotCrashingByDefault" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.038"/>
+  <testcase name="test03_checkContrastOnlyWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.239"/>
+  <testcase name="test04_checkContrastOnlyWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.251"/>
+  <testcase name="test05_checkBrightnessBeforeContrastWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.262"/>
+  <testcase name="test06_checkBrightnessBeforeContrastWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.25"/>
+  <testcase name="test07_checkBrightnessBeforeContrastWiderSample" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.264"/>
+  <testcase name="test08_checkContrastBeforeBrightnessWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.256"/>
+  <testcase name="test09_checkContrastBeforeBrightnessWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.266"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

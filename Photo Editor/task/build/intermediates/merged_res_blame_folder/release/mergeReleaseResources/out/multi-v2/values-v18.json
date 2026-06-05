@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.hyperskill.photoeditor.Photo_Editor-task-mergeReleaseResources-30:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "/Users/jaesu/.gradle/caches/8.10/transforms/debb8c7e71cbd83e3ff540aac5a19fe1/transformed/appcompat-1.7.0/res/values-v18/values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -3,4 +3,5 @@
     <string name="gallery">Gallery</string>
     <string name="brightness_slider">Brightness Slider</string>
     <string name="save">Save</string>
+    <string name="contrast_slider">Contrast Slider</string>
 </resources>

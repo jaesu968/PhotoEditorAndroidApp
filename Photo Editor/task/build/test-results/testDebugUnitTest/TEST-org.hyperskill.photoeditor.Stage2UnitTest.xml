@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.hyperskill.photoeditor.Stage2UnitTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-06-05T16:42:35" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="3.542">
+<testsuite name="org.hyperskill.photoeditor.Stage2UnitTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-06-05T19:22:22" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="3.618">
   <properties/>
-  <testcase name="test01_checkImageView" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="2.321"/>
-  <testcase name="test02_checkButtonGallery" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.052"/>
-  <testcase name="test03_checkSliderBrightness" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.049"/>
-  <testcase name="test04_checkSliderNotCrashing" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.052"/>
-  <testcase name="test05_checkDefaultBitmapEdit" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.472"/>
-  <testcase name="test06_checkLoadedBitmapEdit" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.283"/>
-  <testcase name="test07_checkDefaultBitmapEditExhaustive" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.313"/>
+  <testcase name="test01_checkImageView" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="2.374"/>
+  <testcase name="test02_checkButtonGallery" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.062"/>
+  <testcase name="test03_checkSliderBrightness" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.047"/>
+  <testcase name="test04_checkSliderNotCrashing" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.061"/>
+  <testcase name="test05_checkDefaultBitmapEdit" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.476"/>
+  <testcase name="test06_checkLoadedBitmapEdit" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.298"/>
+  <testcase name="test07_checkDefaultBitmapEditExhaustive" classname="org.hyperskill.photoeditor.Stage2UnitTest" time="0.3"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

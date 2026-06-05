@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "org.hyperskill.photoeditor.Photo_Editor-task-mergeReleaseResources-31:/layout/activity_main.xml",
+        "source": "org.hyperskill.photoeditor.Photo_Editor-task-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/jaesu/.gradle/daemon/8.10/org.hyperskill.photoeditor.Photo_Editor-task-mergeReleaseResources-31:/layout/activity_main.xml",
+        "source": "/Users/jaesu/.gradle/daemon/8.10/org.hyperskill.photoeditor.Photo_Editor-task-main-33:/layout/activity_main.xml"
+    }
+]
