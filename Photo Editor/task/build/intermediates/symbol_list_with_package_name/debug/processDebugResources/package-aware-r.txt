@@ -3084,6 +3084,7 @@ id blocking
 id bottom
 id bounce
 id btnGallery
+id btnSave
 id buttonPanel
 id cache_measures
 id cancel_button
@@ -3809,6 +3810,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string save
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description

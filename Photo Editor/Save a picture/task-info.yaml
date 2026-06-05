@@ -6,10 +6,6 @@ files:
   - name: src/main/res/drawable/ic_launcher_background.xml
     visible: true
     learner_created: false
-  - name: src/main/res/drawable/myexample.jpg
-    visible: true
-    is_binary: true
-    learner_created: false
   - name: src/main/res/drawable-v24/ic_launcher_foreground.xml
     visible: true
     learner_created: false
@@ -38,15 +34,23 @@ files:
     visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/AbstractUnitTest.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/CustomShadowBitmap.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/PhotoEditorUnitTest.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/Stage2UnitTest.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/Stage3UnitTest.kt
+    visible: true
     learner_created: false
 feedback_link: https://hyperskill.org/projects/559/stages/3195/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 05 Jun 2026 16:42:40 UTC"
 record: -1

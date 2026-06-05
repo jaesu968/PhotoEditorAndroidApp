@@ -25,15 +25,19 @@ public final class ActivityMainBinding implements ViewBinding {
   public final Button btnGallery;
 
   @NonNull
+  public final Button btnSave;
+
+  @NonNull
   public final ImageView ivPhoto;
 
   @NonNull
   public final Slider slBrightness;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull Button btnGallery,
-      @NonNull ImageView ivPhoto, @NonNull Slider slBrightness) {
+      @NonNull Button btnSave, @NonNull ImageView ivPhoto, @NonNull Slider slBrightness) {
     this.rootView = rootView;
     this.btnGallery = btnGallery;
+    this.btnSave = btnSave;
     this.ivPhoto = ivPhoto;
     this.slBrightness = slBrightness;
   }
@@ -71,6 +75,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnSave;
+      Button btnSave = ViewBindings.findChildViewById(rootView, id);
+      if (btnSave == null) {
+        break missingId;
+      }
+
       id = R.id.ivPhoto;
       ImageView ivPhoto = ViewBindings.findChildViewById(rootView, id);
       if (ivPhoto == null) {
@@ -83,7 +93,7 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, btnGallery, ivPhoto,
+      return new ActivityMainBinding((ConstraintLayout) rootView, btnGallery, btnSave, ivPhoto,
           slBrightness);
     }
     String missingId = rootView.getResources().getResourceName(id);

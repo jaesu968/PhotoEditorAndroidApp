@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "org.hyperskill.photoeditor.Photo_Editor-task-mergeDebugResources-30:/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "org.hyperskill.photoeditor.Photo_Editor-task-mergeDebugResources-2:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
-                    "source": "/Users/jaesu/.gradle/caches/8.10/transforms/50a14bfeebe332975b0f33ca07d2e577/transformed/core-1.15.0/res/values-fr-rCA/values-fr-rCA.xml",
+                    "source": "/Users/jaesu/gradle/caches/8.10/transforms/50a14bfeebe332975b0f33ca07d2e577/transformed/core-1.15.0/res/values-fr-rCA/values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/jaesu/.gradle/caches/8.10/transforms/d8744c93baf9b4d262d626da2faa09d9/transformed/material-1.11.0/res/values-fr-rCA/values-fr-rCA.xml",
+                    "source": "/Users/jaesu/gradle/caches/8.10/transforms/d8744c93baf9b4d262d626da2faa09d9/transformed/material-1.11.0/res/values-fr-rCA/values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -40,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "/Users/jaesu/.gradle/caches/8.10/transforms/debb8c7e71cbd83e3ff540aac5a19fe1/transformed/appcompat-1.7.0/res/values-fr-rCA/values-fr-rCA.xml",
+                    "source": "/Users/jaesu/gradle/caches/8.10/transforms/debb8c7e71cbd83e3ff540aac5a19fe1/transformed/appcompat-1.7.0/res/values-fr-rCA/values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

@@ -35,12 +35,13 @@ files:
     visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/AbstractUnitTest.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/CustomShadowBitmap.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/PhotoEditorUnitTest.kt
-    learner_created: false
-  - name: test/java/org/hyperskill/photoeditor/Stage1UnitTest.kt
+    visible: true
     learner_created: false
   - name: build.gradle
     visible: true

@@ -38,12 +38,16 @@ files:
     visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/AbstractUnitTest.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/CustomShadowBitmap.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/internals/PhotoEditorUnitTest.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/Stage2UnitTest.kt
+    visible: true
     learner_created: false
 feedback_link: https://hyperskill.org/projects/559/stages/3194/implement#comment
 status: Solved

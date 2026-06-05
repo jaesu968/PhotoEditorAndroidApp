@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-22:12
-INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-22:12
-INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-22:12
-INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-22:12
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-28:12
+INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-28:12
+INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-28:12
+INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:1-28:12
 MERGED from [androidx.databinding:viewbinding:8.7.2] /Users/jaesu/.gradle/caches/8.10/transforms/5d05ac8dc4a4e2dd9b6e1c5c43ab4b59/transformed/jetified-viewbinding-8.7.2/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.11.0] /Users/jaesu/.gradle/caches/8.10/transforms/d8744c93baf9b4d262d626da2faa09d9/transformed/material-1.11.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/jaesu/.gradle/caches/8.10/transforms/dddb0e318fa89f98153732f78188aefb/transformed/constraintlayout-2.0.4/AndroidManifest.xml:2:1-11:12
@@ -54,9 +54,25 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/jaesu/.gr
 		INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.READ_MEDIA_IMAGES
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:4:5-76
+	android:name
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:4:22-73
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:5:5-6:50
+	android:maxSdkVersion
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:6:22-48
+	android:name
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:5:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:7:5-8:50
+	android:maxSdkVersion
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:8:22-48
+	android:name
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:7:22-78
 application
-ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:4:5-20:19
-INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:4:5-20:19
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:10:5-26:19
+INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:10:5-26:19
 MERGED from [com.google.android.material:material:1.11.0] /Users/jaesu/.gradle/caches/8.10/transforms/d8744c93baf9b4d262d626da2faa09d9/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] /Users/jaesu/.gradle/caches/8.10/transforms/d8744c93baf9b4d262d626da2faa09d9/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/jaesu/.gradle/caches/8.10/transforms/dddb0e318fa89f98153732f78188aefb/transformed/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
@@ -78,33 +94,33 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/jaes
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.15.0] /Users/jaesu/.gradle/caches/8.10/transforms/50a14bfeebe332975b0f33ca07d2e577/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:9:9-35
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:15:9-35
 	android:label
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:7:9-41
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:13:9-41
 	android:roundIcon
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:8:9-54
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:14:9-54
 	android:icon
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:6:9-43
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:5:9-35
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:10:9-40
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:16:9-40
 activity#org.hyperskill.photoeditor.MainActivity
-ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:11:9-19:20
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:17:9-25:20
 	android:exported
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:13:13-36
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:19:13-36
 	android:name
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:12:13-41
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:18:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:14:13-18:29
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:20:13-24:29
 action#android.intent.action.MAIN
-ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:15:17-69
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:21:17-69
 	android:name
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:15:25-66
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:21:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:17:17-77
+ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:23:17-77
 	android:name
-		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:17:27-74
+		ADDED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml:23:27-74
 uses-sdk
 INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/jaesu/IdeaProjects/Photo Editor/Photo Editor/task/src/main/AndroidManifest.xml

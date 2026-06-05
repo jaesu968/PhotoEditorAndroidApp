@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "org.hyperskill.photoeditor.Photo_Editor-task-mergeDebugResources-30:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "org.hyperskill.photoeditor.Photo_Editor-task-mergeDebugResources-2:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
-                    "source": "/Users/jaesu/.gradle/caches/8.10/transforms/50a14bfeebe332975b0f33ca07d2e577/transformed/core-1.15.0/res/values-en-rAU/values-en-rAU.xml",
+                    "source": "/Users/jaesu/gradle/caches/8.10/transforms/50a14bfeebe332975b0f33ca07d2e577/transformed/core-1.15.0/res/values-en-rAU/values-en-rAU.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/jaesu/.gradle/caches/8.10/transforms/debb8c7e71cbd83e3ff540aac5a19fe1/transformed/appcompat-1.7.0/res/values-en-rAU/values-en-rAU.xml",
+                    "source": "/Users/jaesu/gradle/caches/8.10/transforms/debb8c7e71cbd83e3ff540aac5a19fe1/transformed/appcompat-1.7.0/res/values-en-rAU/values-en-rAU.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
