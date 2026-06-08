@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,12 +15,11 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
 import com.google.android.material.slider.Slider
-import android.graphics.drawable.BitmapDrawable
-import androidx.core.app.ActivityCompat
 import kotlin.math.pow
-
+import kotlinx.coroutines.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var currentImage: ImageView
@@ -35,6 +35,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var slSaturation: Slider
     // property for the gamma slider
     private lateinit var slGamma: Slider
+    // field to keep track of the last job in case we wish to cancel it
+    // beginning of asynchronous coding for slider adjustments to
+    // avoid blocking the main thread and ensure a smooth user experience when applying filters to the image,
+    // especially for larger images where processing can take more time
+    private var lastJob: Job? = null
+    // activity owned scope
+    // for launching code asynchronously for slider adjustments to
+    // avoid blocking the main thread and ensure a smooth user experience when applying filters to the image,
+    private val uiScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     // property for baseBitmap to store the original image for brightness adjustment
     private var baseBitmap: Bitmap? = null
 
@@ -132,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     // helper function to apply both contrast and brightness filters
-    fun renderFilters(source: Bitmap, contrast: Int, brightness: Int, saturation: Int, gamma: Double) {
+    fun computeFilteredBitmap(source : Bitmap, brightness: Int, contrast: Int, saturation: Int, gamma: Double): Bitmap {
         // get brightness adjusted bitmap
         val brightBitmap = applyBrightnessFilter(source, brightness)
         // get adjusted contrast bitmap by applying contrast filter to the adjusted brightness bitmap
@@ -142,13 +151,31 @@ class MainActivity : AppCompatActivity() {
         val saturationBitmap = applySaturationFilter(contrastBitmap, saturation)
         // apply the gamma filter to the adjusted saturation bitmap with the current gamma slider value to ensure that all adjustments are applied together correctly without stacking effects
         val gammaBitmap = applyGammaFilter(saturationBitmap, gamma)
-        // set the final adjusted bitmap to the ImageView to update the displayed image
-        currentImage.setImageBitmap(gammaBitmap)
+        // return the final adjusted bitmap with all filters applied together (don't set ImageView)
+        return gammaBitmap
     }
     // tiny helper function to apply all filters together for the sliders
     private fun updateImageFromSliders(){
-        baseBitmap?.let { source ->
-            renderFilters(source, slContrast.value.toInt(), slBrightness.value.toInt(), slSaturation.value.toInt(), slGamma.value.toDouble())
+        // capture immutable inputs before launching
+        // remember source is baseBitmap
+        val source = baseBitmap ?: return
+        val brightness = slBrightness.value.toInt()
+        val contrast = slContrast.value.toInt()
+        val saturation = slSaturation.value.toInt()
+        val gamma = slGamma.value.toDouble()
+        // cancel the previous job if there is one
+        lastJob?.cancel()
+
+        // launch on background dispatcher
+        lastJob = uiScope.launch(Dispatchers.Default) {
+           // compute the final bitmap with all filters applied together
+            val finalBitmap = computeFilteredBitmap(source, brightness, contrast, saturation, gamma)
+            // check if the coroutine was canceled while calculating, if so, stop immediately, saving resources
+            ensureActive()
+            // use runOnUIThread to apply changes to final image on Main Thread
+            runOnUiThread {
+                currentImage.setImageBitmap(finalBitmap)
+            }
         }
     }
     // a function to apply gamma changes to the image based on the slider value
@@ -341,6 +368,8 @@ class MainActivity : AppCompatActivity() {
         bitmapOut.setPixels(pixels, 0, width, 0, 0, width, height)
         return bitmapOut
     }
+
+
     // ActivityResultLauncher to handle the result from the gallery
     private val activityResultLauncher =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -356,9 +385,19 @@ class MainActivity : AppCompatActivity() {
                 // keep the original image as untouched base
                 baseBitmap = loadedBitmap
 
-                // reapply current slider value from base (no stacking)
-                // apply both bright and contrast filters with renderFilters to apply both adjustments together
-                renderFilters(loadedBitmap, slContrast.value.toInt(), slBrightness.value.toInt(), slSaturation.value.toInt(), slGamma.value.toDouble())
+                // Show the picked image immediately; filters are applied asynchronously after this.
+                currentImage.setImageBitmap(loadedBitmap)
+
+                // call updateImageSliders(), keeps one rendering path and keeps UI responsive
+                updateImageFromSliders()
             }
         }
+    // override onDestroy() so it clears out jobs and uiScope
+    // make sure no background tasks are running when the activity is closed to avoid memory leaks and unnecessary resource usage
+    override fun onDestroy() {
+        lastJob?.cancel() // cancel any jobs
+        uiScope.cancel() // cancel the scope to clean up resources and avoid memory leaks when the activity is destroyed
+        super.onDestroy() // destroy activity
+    }
+
 }

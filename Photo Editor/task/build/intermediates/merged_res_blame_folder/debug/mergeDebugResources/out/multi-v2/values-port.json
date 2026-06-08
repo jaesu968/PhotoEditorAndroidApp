@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "org.hyperskill.photoeditor.Photo_Editor-task-mergeDebugResources-2:/values-port/values-port.xml",
+            "outputFile": "org.hyperskill.photoeditor.Photo_Editor-task-mergeDebugResources-30:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/Users/jaesu/gradle/caches/8.10/transforms/debb8c7e71cbd83e3ff540aac5a19fe1/transformed/appcompat-1.7.0/res/values-port/values-port.xml",
+                    "source": "/Users/jaesu/.gradle/caches/8.10/transforms/debb8c7e71cbd83e3ff540aac5a19fe1/transformed/appcompat-1.7.0/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

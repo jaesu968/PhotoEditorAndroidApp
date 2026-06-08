@@ -8,6 +8,12 @@ summary: "<p>Everyone has tried editing photos in an editor. Most of them are pa
 programming_language: Kotlin
 content:
   - Photo Editor
-additional_files: [ ]
+additional_files:
+  - name: settings.gradle
+    visible: true
+  - name: build.gradle
+    visible: true
+  - name: gradle.properties
+    visible: true
 mode: Study
 yaml_version: 5

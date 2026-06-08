@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
@@ -42,6 +42,23 @@
             app:layout_constraintStart_toEndOf="@+id/btnGallery"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+    <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tvBrightnessLabel,tvContrastLabel,tvSaturationLabel,tvGammaLabel" />
+
+    <TextView
+            android:id="@+id/tvBrightnessLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/brightness"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/slBrightness"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/slBrightness" />
+
     <com.google.android.material.slider.Slider
             android:id="@+id/slBrightness"
             android:valueFrom="-250"
@@ -52,14 +69,24 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/btnGallery"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/slContrast"
-            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toEndOf="@id/barrierLabels"
+            app:layout_constraintBottom_toTopOf="@id/slContrast"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
             android:contentDescription="@string/brightness_slider"
             />
+
+    <TextView
+            android:id="@+id/tvContrastLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contrast"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/slContrast"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/slContrast" />
+
     <com.google.android.material.slider.Slider
             android:id="@+id/slContrast"
             android:valueFrom="-250"
@@ -70,13 +97,68 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/slBrightness"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/barrierLabels"
+            app:layout_constraintBottom_toTopOf="@+id/slSaturation"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/contrast_slider"
+    />
+
+    <TextView
+            android:id="@+id/tvSaturationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saturation"
             android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/slSaturation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/slSaturation" />
+
+    <com.google.android.material.slider.Slider
+            android:id="@+id/slSaturation"
+            android:valueFrom="-250"
+            android:valueTo="250"
+            android:stepSize="10"
+            android:value="0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/slContrast"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/barrierLabels"
+            app:layout_constraintBottom_toTopOf="@+id/slGamma"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/saturation_slider"
+    />
+
+    <TextView
+            android:id="@+id/tvGammaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gamma"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/slGamma"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/slGamma" />
+
+    <com.google.android.material.slider.Slider
+            android:id="@+id/slGamma"
+            android:valueFrom="0.2"
+            android:valueTo="4"
+            android:stepSize="0.2"
+            android:value="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/slSaturation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/barrierLabels"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:contentDescription="@string/contrast_slider"
+            android:contentDescription="@string/gamma_slider"
     />
 
 

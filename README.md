@@ -3,16 +3,13 @@
 This is an educational Android project built with Kotlin and `ConstraintLayout`.
 The app loads a photo from the gallery, applies multiple image filters, and saves the edited result.
 
-## Project Goals
 
 - Practice Android UI layout and view binding
 - Work with bitmaps and per-pixel image processing
 - Handle runtime permissions and media saving
 - Build a filter pipeline where order matters
 
-## Stage-by-Stage Progress
 
-### Stage 1 - Take a picture (load from the gallery)
 
 **What was implemented**
 - Added `ImageView` (`ivPhoto`) to display an image
@@ -32,7 +29,6 @@ activityResultLauncher.launch(intent)
 
 ---
 
-### Stage 2 - Brightness filter
 
 **What was implemented**
 - Added brightness slider (`slBrightness`)
@@ -53,7 +49,6 @@ val b = clamp(Color.blue(color) + delta)
 
 ---
 
-### Stage 3 - Save a picture
 
 **What was implemented**
 - Added save button (`btnSave`)
@@ -75,7 +70,6 @@ bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output)
 
 ---
 
-### Stage 4 - Contrast filter
 
 **What was implemented**
 - Added contrast slider (`slContrast`)
@@ -96,7 +90,6 @@ val rOut = clamp((alpha * (r - avgBrightness) + avgBrightness).toInt())
 
 ---
 
-### Stage 5 - Saturation and gamma
 
 **What was implemented**
 - Added saturation slider (`slSaturation`), range `-250..250`, step `10`
@@ -124,13 +117,11 @@ currentImage.setImageBitmap(gamma)
 
 ---
 
-## Architecture Notes
 
 - `baseBitmap` stores the original selected image
 - Every slider change calls a single render path (`updateImageFromSliders`)
 - `clamp(v)` ensures all channel values stay in RGB bounds
 
-## Current UI Controls
 
 - `btnGallery` - pick image from the gallery
 - `btnSave` - save current edited image

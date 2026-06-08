@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.hyperskill.photoeditor.Stage4UnitTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-06-08T16:42:54" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="1.915">
+<testsuite name="org.hyperskill.photoeditor.Stage4UnitTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-06-08T19:30:54" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="1.911">
   <properties/>
-  <testcase name="test01_checkSliderContrast" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.041"/>
+  <testcase name="test01_checkSliderContrast" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.059"/>
   <testcase name="test02_checkSliderContrastNotCrashingByDefault" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.048"/>
-  <testcase name="test03_checkContrastOnlyWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.244"/>
-  <testcase name="test04_checkContrastOnlyWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.258"/>
-  <testcase name="test05_checkBrightnessBeforeContrastWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.256"/>
-  <testcase name="test06_checkBrightnessBeforeContrastWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.259"/>
-  <testcase name="test07_checkBrightnessBeforeContrastWiderSample" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.259"/>
-  <testcase name="test08_checkContrastBeforeBrightnessWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.284"/>
-  <testcase name="test09_checkContrastBeforeBrightnessWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.264"/>
+  <testcase name="test03_checkContrastOnlyWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.253"/>
+  <testcase name="test04_checkContrastOnlyWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.254"/>
+  <testcase name="test05_checkBrightnessBeforeContrastWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.263"/>
+  <testcase name="test06_checkBrightnessBeforeContrastWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.256"/>
+  <testcase name="test07_checkBrightnessBeforeContrastWiderSample" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.265"/>
+  <testcase name="test08_checkContrastBeforeBrightnessWithHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.255"/>
+  <testcase name="test09_checkContrastBeforeBrightnessWithoutHint" classname="org.hyperskill.photoeditor.Stage4UnitTest" time="0.257"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
