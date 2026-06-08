@@ -18,6 +18,7 @@ import androidx.core.content.PermissionChecker
 import com.google.android.material.slider.Slider
 import android.graphics.drawable.BitmapDrawable
 import androidx.core.app.ActivityCompat
+import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var slBrightness: Slider
     // property for the contrast slider
     private lateinit var slContrast: Slider
+    // property for the saturation slider
+    private lateinit var slSaturation: Slider
+    // property for the gamma slider
+    private lateinit var slGamma: Slider
     // property for baseBitmap to store the original image for brightness adjustment
     private var baseBitmap: Bitmap? = null
 
@@ -94,23 +99,21 @@ class MainActivity : AppCompatActivity() {
         // it should apply both filters together based on the current values of both sliders to ensure
         // that the adjustments are applied correctly without compounding the effects of previous adjustments
         // Brightness slider listener first
-        slBrightness.addOnChangeListener { _, value, _ ->
-                /// get current brightness value
-                val brightness = value.toInt()
-                // apply changes to base bitmap and render the filters to update the image in the ImageView
-                baseBitmap?.let { source ->
-                    renderFilters(source, slContrast.value.toInt(), brightness)
-                }
+        slBrightness.addOnChangeListener { _, _, _ ->
+            updateImageFromSliders() // get all current slider values and apply them together to the base bitmap to update the image in the ImageView
             }
         // Contrast slider listener second
-        slContrast.addOnChangeListener { _, value, _ ->
-                // get current contrast value
-                val contrast = value.toInt()
-                // apply changes to base bitmap and render the filters to update the image in the ImageView
-                baseBitmap?.let { source ->
-                    renderFilters(source, contrast, slBrightness.value.toInt())
-                }
+        slContrast.addOnChangeListener { _, _, _ ->
+            updateImageFromSliders() // get all current slider values and apply them together to the base bitmap to update the image in the ImageView
             }
+        // Saturation slider listener third
+        slSaturation.addOnChangeListener { _, _, _ ->
+            updateImageFromSliders() // get all current slider values and apply them together to the base bitmap to update the image in the ImageView
+            }
+        // Gamma slider listener fourth
+        slGamma.addOnChangeListener { _, _, _ ->
+            updateImageFromSliders() // get all current slider values and apply them together to the base bitmap to update the image in the ImageView
+        }
     }
     // helper function to override onRequestPermissionResult
     // this function checks if the permission request code matches and if the permission was granted,
@@ -129,14 +132,88 @@ class MainActivity : AppCompatActivity() {
         }
 
     // helper function to apply both contrast and brightness filters
-    fun renderFilters(source: Bitmap, contrast: Int, brightness: Int) {
+    fun renderFilters(source: Bitmap, contrast: Int, brightness: Int, saturation: Int, gamma: Double) {
         // get brightness adjusted bitmap
         val brightBitmap = applyBrightnessFilter(source, brightness)
         // get adjusted contrast bitmap by applying contrast filter to the adjusted brightness bitmap
         // to ensure that both adjustments are applied together correctly without stacking effects
         val contrastBitmap = applyContrastFilter(brightBitmap, contrast)
+        // apply the saturation filter to the adjusted contrast bitmap with the current saturation slider value to ensure that all adjustments are applied together correctly without stacking effects
+        val saturationBitmap = applySaturationFilter(contrastBitmap, saturation)
+        // apply the gamma filter to the adjusted saturation bitmap with the current gamma slider value to ensure that all adjustments are applied together correctly without stacking effects
+        val gammaBitmap = applyGammaFilter(saturationBitmap, gamma)
         // set the final adjusted bitmap to the ImageView to update the displayed image
-        currentImage.setImageBitmap(contrastBitmap)
+        currentImage.setImageBitmap(gammaBitmap)
+    }
+    // tiny helper function to apply all filters together for the sliders
+    private fun updateImageFromSliders(){
+        baseBitmap?.let { source ->
+            renderFilters(source, slContrast.value.toInt(), slBrightness.value.toInt(), slSaturation.value.toInt(), slGamma.value.toDouble())
+        }
+    }
+    // a function to apply gamma changes to the image based on the slider value
+    fun applyGammaFilter(source: Bitmap, gamma: Double): Bitmap {
+        // read all pixels from the source bitmap into an array
+        val width = source.width
+        val height = source.height
+        val pixels = IntArray(width * height)
+        // get the pixel data from the source bitmap and store it in the "pixels" array
+        source.getPixels(pixels, 0, width, 0, 0, width, height)
+        // for each pixel, adjust the RGB values based on the gamma value from the slider
+        for (i in pixels.indices) {
+            val color = pixels[i]
+            val r = Color.red(color)
+            val g = Color.green(color)
+            val b = Color.blue(color)
+            // apply gamma adjustment formula to each RGB channel and clamp the result
+            // gamma adjustment formula: 255.0 * (red / 255.0 ^ gamma) to adjust the brightness of the image based on the gamma value from the slider,
+            // where red is the original red value of the pixel (substitute same formula for green and, blue channels)
+            // and gamma is the value from the slider that controls the intensity of the adjustment
+            val rGamma = clamp((255.0 * (r / 255.0).pow(gamma)).toInt())
+            val gGamma = clamp((255.0 * (g / 255.0).pow(gamma)).toInt())
+            val bGamma = clamp((255.0 * (b / 255.0).pow(gamma)).toInt())
+            // set the adjusted color back to the pixel array
+            pixels[i] = Color.argb(Color.alpha(color), rGamma, gGamma, bGamma)
+        }
+        // create a new bitmap with the adjusted pixel array
+        val adjustedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        // set the adjusted pixels to the new bitmap
+        adjustedBitmap.setPixels(pixels, 0, width, 0, 0, width, height)
+        // return the adjusted bitmap to be displayed in the ImageView
+        return adjustedBitmap
+    }
+    // a function to apply saturation changes to the image based on the slider value
+    fun applySaturationFilter(source: Bitmap, saturation: Int): Bitmap {
+        // read all pixels from the source bitmap into an array
+        val width = source.width
+        val height = source.height
+        val pixels= IntArray(width * height)
+        // get the pixel data from the source bitmap and store it in the "pixels" array
+        source.getPixels(pixels, 0, width, 0, 0, width, height)
+        // variable for the alpha value, alpha = (255.0 + saturation) / (255.0 - saturation)
+        val alpha = (255.0 + saturation) / (255.0 - saturation) // double to avoid integer division and loss of precision
+        // for each pixel, adjust the RGB values based on the saturation value from the slider
+        for (i in pixels.indices){
+            val color = pixels[i]
+            val r = Color.red(color)
+            val g = Color.green(color)
+            val b = Color.blue(color)
+            // compute average rgb values to compute the adjusted RGB values based on the saturation adjustment formula
+            val rgbAvg = (r + g + b) / 3
+            // apply saturation adjustment formula to each RGB channel and clamp the result
+            val rSat = clamp((alpha * (r - rgbAvg) + rgbAvg).toInt())
+            val gSat = clamp((alpha * (g - rgbAvg) + rgbAvg).toInt())
+            val bSat = clamp((alpha * (b - rgbAvg) + rgbAvg).toInt())
+            // set the adjusted color back to the pixel array
+            pixels[i] = Color.argb(Color.alpha(color), rSat, gSat, bSat)
+        }
+
+        // create a new bitmap with the adjusted pixel array
+        val adjustedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        // set the adjusted pixels to the new bitmap
+        adjustedBitmap.setPixels(pixels, 0, width, 0, 0, width, height)
+        // return the adjusted bitmap to be displayed in the ImageView
+        return adjustedBitmap
     }
     //a function to apply contrast changes to the image based on the slider value
     fun applyContrastFilter(source: Bitmap, contrast: Int): Bitmap {
@@ -230,6 +307,8 @@ class MainActivity : AppCompatActivity() {
         slBrightness = findViewById(R.id.slBrightness)
         btnSave = findViewById(R.id.btnSave)
         slContrast = findViewById(R.id.slContrast)
+        slSaturation = findViewById(R.id.slSaturation)
+        slGamma = findViewById(R.id.slGamma)
     }
 
     // do not change this function
@@ -279,7 +358,7 @@ class MainActivity : AppCompatActivity() {
 
                 // reapply current slider value from base (no stacking)
                 // apply both bright and contrast filters with renderFilters to apply both adjustments together
-                renderFilters(loadedBitmap, slContrast.value.toInt(), slBrightness.value.toInt())
+                renderFilters(loadedBitmap, slContrast.value.toInt(), slBrightness.value.toInt(), slSaturation.value.toInt(), slGamma.value.toDouble())
             }
         }
 }

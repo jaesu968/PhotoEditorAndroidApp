@@ -4,4 +4,10 @@
     <string name="brightness_slider">Brightness Slider</string>
     <string name="save">Save</string>
     <string name="contrast_slider">Contrast Slider</string>
+    <string name="saturation_slider">Saturation Slider</string>
+    <string name="gamma_slider">Gamma Slider</string>
+    <string name="brightness">brightness</string>
+    <string name="contrast">contrast</string>
+    <string name="saturation">saturation</string>
+    <string name="gamma">gamma</string>
 </resources>

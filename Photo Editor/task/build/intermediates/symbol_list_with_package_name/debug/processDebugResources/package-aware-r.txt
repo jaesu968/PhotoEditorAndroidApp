@@ -3077,6 +3077,7 @@ id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
 id barrier
+id barrierLabels
 id baseline
 id beginOnFirstDraw
 id beginning
@@ -3363,6 +3364,8 @@ id sin
 id skipCollapsed
 id slBrightness
 id slContrast
+id slGamma
+id slSaturation
 id slide
 id snackbar_action
 id snackbar_text
@@ -3435,6 +3438,10 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvBrightnessLabel
+id tvContrastLabel
+id tvGammaLabel
+id tvSaturationLabel
 id unchecked
 id uniform
 id unlabeled
@@ -3685,6 +3692,7 @@ string bottomsheet_action_expand
 string bottomsheet_action_expand_halfway
 string bottomsheet_drag_handle_clicked
 string bottomsheet_drag_handle_content_description
+string brightness
 string brightness_slider
 string call_notification_answer_action
 string call_notification_answer_video_action
@@ -3697,6 +3705,7 @@ string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string clear_text_end_icon_content_description
+string contrast
 string contrast_slider
 string error_a11y_label
 string error_icon_content_description
@@ -3704,6 +3713,8 @@ string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string gallery
+string gamma
+string gamma_slider
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
@@ -3812,6 +3823,8 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string saturation
+string saturation_slider
 string save
 string search_menu_title
 string searchbar_scrolling_view_behavior

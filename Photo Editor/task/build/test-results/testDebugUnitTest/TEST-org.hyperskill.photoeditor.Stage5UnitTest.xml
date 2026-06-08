@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.hyperskill.photoeditor.Stage5UnitTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-06-08T16:42:56" hostname="dhcp-10-105-215-245.wireless.northwestern.private" time="1.925">
+  <properties/>
+  <testcase name="test01_checkSliderSaturation" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.053"/>
+  <testcase name="test02_checkSliderGamma" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.041"/>
+  <testcase name="test03_checkSliderSaturationNotCrashingByDefault" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.041"/>
+  <testcase name="test04_checkSliderGammaNotCrashingByDefault" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.039"/>
+  <testcase name="test05_checkSaturationOnlyWithHints" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.235"/>
+  <testcase name="test06_checkSaturationOnlyWithoutHints" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.245"/>
+  <testcase name="test07_checkGammaOnlyWithHints" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.242"/>
+  <testcase name="test08_checkGammaOnlyWithoutHints" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.256"/>
+  <testcase name="test09_checkFiltersAppliedInOrder" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.256"/>
+  <testcase name="test10_checkFiltersAppliedInReverseOrder" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.245"/>
+  <testcase name="test11_checkFiltersAppliedInReverseOrderWiderSample" classname="org.hyperskill.photoeditor.Stage5UnitTest" time="0.271"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
