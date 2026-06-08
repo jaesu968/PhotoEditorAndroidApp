@@ -1,25 +1,28 @@
 # Photo Editor (Hyperskill)
 
-This is an educational Android project built with Kotlin and `ConstraintLayout`.
-The app loads a photo from the gallery, applies multiple image filters, and saves the edited result.
+Android photo editor project built with Kotlin. The app lets users pick an image from the gallery, apply real-time filters, and save the edited output.
 
+## Project Goals
 
-- Practice Android UI layout and view binding
-- Work with bitmaps and per-pixel image processing
-- Handle runtime permissions and media saving
-- Build a filter pipeline where order matters
+- Build Android UI with `ConstraintLayout` and Material components
+- Practice bitmap-based pixel manipulation in Kotlin
+- Handle Android storage/runtime permission flow
+- Apply multiple filters in a deterministic pipeline
+- Keep the UI responsive during expensive image processing
 
+## Stage-by-Stage Progress
 
+### Stage 1 - Take a picture (gallery load)
 
-**What was implemented**
-- Added `ImageView` (`ivPhoto`) to display an image
-- Added gallery button (`btnGallery`) to pick media from storage
-- Implemented activity result flow to decode the selected image into a bitmap
+**Implemented**
+- Added `ImageView` (`ivPhoto`) to preview image output
+- Added gallery button (`btnGallery`)
+- Implemented gallery pick flow with activity result launcher
 
 **Key concepts**
 - `Intent.ACTION_PICK`
 - `ActivityResultContracts.StartActivityForResult`
-- `contentResolver.openInputStream(uri)` + `BitmapFactory.decodeStream(...)`
+- `BitmapFactory.decodeStream(...)`
 
 **Key code idea**
 ```kotlin
@@ -27,18 +30,17 @@ val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT
 activityResultLauncher.launch(intent)
 ```
 
----
+### Stage 2 - Brightness filter
 
-
-**What was implemented**
-- Added brightness slider (`slBrightness`)
+**Implemented**
+- Added `slBrightness`
 - Implemented `applyBrightnessFilter(source, delta)`
-- Recomputed output from a preserved `baseBitmap` to avoid stacking artifacts
+- Preserved original source with `baseBitmap` to avoid stacking errors
 
 **Key concepts**
-- Reading and writing pixels via `getPixels` / `setPixels`
-- Per-channel transform with clamping to `[0, 255]`
-- Real-time slider-driven rendering
+- `getPixels` / `setPixels`
+- Per-channel RGB adjustment
+- Channel clamping to `[0, 255]`
 
 **Key code idea**
 ```kotlin
@@ -47,19 +49,18 @@ val g = clamp(Color.green(color) + delta)
 val b = clamp(Color.blue(color) + delta)
 ```
 
----
+### Stage 3 - Save a picture
 
-
-**What was implemented**
-- Added save button (`btnSave`)
-- Declared storage/media permissions in `AndroidManifest.xml`
-- Implemented runtime permission request flow and callback
-- Saved current bitmap to `MediaStore.Images.Media.EXTERNAL_CONTENT_URI` as JPEG
+**Implemented**
+- Added `btnSave`
+- Added required storage/media permissions in `AndroidManifest.xml`
+- Implemented runtime permission request and callback flow
+- Saved edited image as JPEG to `MediaStore.Images.Media.EXTERNAL_CONTENT_URI`
 
 **Key concepts**
-- Runtime permission check + request
+- Runtime permissions (`WRITE_EXTERNAL_STORAGE` for required API levels)
 - `onRequestPermissionsResult(...)`
-- Writing media through `ContentResolver`
+- Media insertion via `ContentResolver`
 
 **Key code idea**
 ```kotlin
@@ -68,18 +69,16 @@ val output = contentResolver.openOutputStream(uri!!)
 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output)
 ```
 
----
+### Stage 4 - Contrast filter
 
-
-**What was implemented**
-- Added contrast slider (`slContrast`)
-- Implemented contrast adjustment using image average brightness
-- Applied filters in the required order: brightness -> contrast
+**Implemented**
+- Added `slContrast`
+- Implemented contrast using average image brightness
+- Applied filter order: `brightness -> contrast`
 
 **Key concepts**
-- Average image brightness from full pixel accumulation (`Long`)
-- Contrast alpha factor as `Double`
-- Order-sensitive filter chaining
+- `avgBrightness` from full accumulation (`Long`) then division to `Int`
+- Contrast factor: `alpha = (255.0 + contrast) / (255.0 - contrast)`
 
 **Key code idea**
 ```kotlin
@@ -88,23 +87,21 @@ val alpha = (255.0 + contrast) / (255.0 - contrast)
 val rOut = clamp((alpha * (r - avgBrightness) + avgBrightness).toInt())
 ```
 
----
+### Stage 5 - Saturation and gamma
 
-
-**What was implemented**
-- Added saturation slider (`slSaturation`), range `-250..250`, step `10`
-- Added gamma slider (`slGamma`), range `0.2..4.0`, step `0.2`, default `1`
-- Implemented saturation and gamma filters and integrated into the render pipeline
-- Unified slider listeners so every change re-renders from `baseBitmap`
+**Implemented**
+- Added `slSaturation` (`-250..250`, step `10`, default `0`)
+- Added `slGamma` (`0.2..4.0`, step `0.2`, default `1`)
+- Implemented saturation and gamma formulas
+- Extended the filter pipeline to:
+  1. Brightness
+  2. Contrast
+  3. Saturation
+  4. Gamma
 
 **Key concepts**
-- Per-pixel saturation using `rgbAvg = (r + g + b) / 3`
-- Gamma transform with exponent `g`: `255 * (channel / 255.0)^g`
-- Full pipeline order:
-  1. brightness
-  2. contrast
-  3. saturation
-  4. gamma
+- Per-pixel `rgbAvg = (r + g + b) / 3`
+- Gamma transform: `255 * (channel / 255.0).pow(gamma)`
 
 **Key code idea**
 ```kotlin
@@ -112,16 +109,41 @@ val bright = applyBrightnessFilter(source, brightness)
 val contrast = applyContrastFilter(bright, contrastValue)
 val saturation = applySaturationFilter(contrast, saturationValue)
 val gamma = applyGammaFilter(saturation, gammaValue)
-currentImage.setImageBitmap(gamma)
 ```
 
----
+### Stage 6 - No more freezes
 
+**Implemented**
+- Added coroutine dependency:
+  - `implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"`
+- Moved filter computation to background thread (`Dispatchers.Default`)
+- Kept UI updates on the main thread (`runOnUiThread`)
+- Added cancellation for stale computations (`lastJob?.cancel()`)
+- Added lifecycle cleanup in `onDestroy()` (`lastJob` + `uiScope` cancel)
 
-- `baseBitmap` stores the original selected image
-- Every slider change calls a single render path (`updateImageFromSliders`)
-- `clamp(v)` ensures all channel values stay in RGB bounds
+**Key concepts**
+- Activity-owned coroutine scope
+- Async filter recomputation on slider changes
+- Cancel obsolete jobs to avoid outdated UI writes
 
+**Key code idea**
+```kotlin
+lastJob?.cancel()
+lastJob = uiScope.launch(Dispatchers.Default) {
+    val finalBitmap = computeFilteredBitmap(source, brightness, contrast, saturation, gamma)
+    ensureActive()
+    runOnUiThread { currentImage.setImageBitmap(finalBitmap) }
+}
+```
+
+## Current Architecture Notes
+
+- `baseBitmap` always stores original loaded image
+- Slider changes call one unified render entrypoint: `updateImageFromSliders()`
+- Filter pipeline is deterministic and order-dependent
+- `clamp(v)` keeps channels in valid RGB range
+
+## UI Controls
 
 - `btnGallery` - pick image from the gallery
 - `btnSave` - save current edited image
