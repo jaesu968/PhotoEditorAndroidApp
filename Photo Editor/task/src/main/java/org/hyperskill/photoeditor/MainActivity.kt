@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             // check for permission, override the onRequestPermissionsResults method to check whether the user granted the permission or not,
             // if granted, save the image, if not, show a toast message that permission is required to save the image
-            if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q || checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 // if permission is granted, override onRequestPermissionsResult
                 // get a bitmap from the current image in the ImageView
                 val bitmap: Bitmap = (currentImage.drawable as BitmapDrawable).bitmap

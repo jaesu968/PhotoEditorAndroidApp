@@ -55,17 +55,17 @@ files:
     visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/Stage2UnitTestB.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/Stage4UnitTestB.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/Stage5UnitTestB.kt
+    visible: true
     learner_created: false
   - name: test/java/org/hyperskill/photoeditor/Stage6UnitTest.kt
+    visible: true
     learner_created: false
 feedback_link: https://hyperskill.org/projects/559/stages/3198/implement#comment
 status: Solved
-feedback:
-  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
-    to continue learning.
-  time: "Mon, 08 Jun 2026 19:31:13 UTC"
 record: -1
